@@ -1,5 +1,6 @@
 @import 'utils/libs'
 @import 'utils/vars'
+@import 'utils/grid'
 @import 'utils/mixins'
 @import 'utils/fonts'
 
@@ -81,17 +82,10 @@ button
   outline: none
 
 .wrapper 
-  display: flex
-  flex-direction: column
-  height: 100%
+  +wrapper()
 
 .content 
   flex: 1 0 auto
-
-.container 
-  margin: 0 auto
-  max-width: $content-size
-  width: 100%
 
 
 //Модули
