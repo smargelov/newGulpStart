@@ -18,6 +18,7 @@ $.gulp.task('dev', $.gulp.series(
     $.gulp.parallel(
         'pug',
         'fonts',
+        'inc',
         'styles:dev',
         'img:dev',
         'libsJS:dev',
@@ -31,6 +32,7 @@ $.gulp.task('build', $.gulp.series(
     $.gulp.parallel(
         'pug',
         'fonts',
+        'inc',
         'styles:build',
         'img:build',
         'libsJS:build',
@@ -45,6 +47,7 @@ $.gulp.task('build-min', $.gulp.series(
     $.gulp.parallel(
         'pug',
         'fonts',
+        'inc',
         'styles:build-min',
         'img:build',
         'libsJS:build',
