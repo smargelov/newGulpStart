@@ -4,10 +4,11 @@ var settings = {
   filename: "grid",
   outputStyle: "sass",
   columns: 12,
+  offset: '20px',
   mobileFirst: false,
   container: {
     maxWidth: "1280px",
-    fields: '30px'
+    fields: '20px'
   },
   breakPoints: {
     lg: {
