@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "My start Template",
   "main": "index.js",
-  "author": "Salamatin Anatoliy",
+  "author": "Sergey Margelov",
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.7.0",
