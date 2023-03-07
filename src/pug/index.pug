@@ -1,7 +1,11 @@
 extends template/main
 
 block variables
+	- const page = 'index'
 	- const title = 'Main page'
+	- const description = 'Main page description'
+	// - const cover = `images/content/${page}-cover.jpg`
+	//	size of cover image: 968x504
 
 block content
 	h1= title

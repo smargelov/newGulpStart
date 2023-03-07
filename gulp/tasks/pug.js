@@ -11,6 +11,9 @@ module.exports = function () {
         return $.gulp.src('./src/pug/*.pug')
             .pipe(plumber())
             .pipe(pug({
+                locals: {
+                    site: JSON.parse($.fs.readFileSync('site.config.json', 'utf8'))
+                },
                 pretty: true,
                 plugins: [pugbem]
             }))

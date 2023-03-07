@@ -6,7 +6,8 @@ global.$ = {
     },
     gulp: require('gulp'),
     browserSync: require('browser-sync').create(),
-    del: require('del')
+    del: require('del'),
+    fs: require('fs'),
 };
 
 $.path.task.forEach(function (taskPath) {
