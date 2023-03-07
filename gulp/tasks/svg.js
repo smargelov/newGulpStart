@@ -1,6 +1,5 @@
 const svgSprite = require('gulp-svg-sprite'),
     svgmin = require('gulp-svgmin'),
-    cheerio = require('gulp-cheerio'),
     replace = require('gulp-replace'),
     svgPath = {
         "input": "./src/static/images/svg/*.svg",
@@ -13,16 +12,6 @@ module.exports = function () {
             .pipe(svgmin({
                 js2svg: {
                     pretty: true
-                }
-            }))
-            .pipe(cheerio({
-                run: function ($) {
-                     $('[fill]').removeAttr('fill');
-                     $('[stroke]').removeAttr('stroke');
-                     $('[style]').removeAttr('style');
-                },
-                parserOptions: {
-                    xmlMode: true
                 }
             }))
             .pipe(replace('&gt;', '>'))
