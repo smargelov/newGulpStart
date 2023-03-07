@@ -1,26 +1,26 @@
-@import 'utils/libs'
 @import 'utils/vars'
-@import 'utils/grid'
 @import 'utils/mixins'
 @import 'utils/fonts'
 
-html 
-  font-size: $base-font-size
+html
+  font-size: var(--main-font-size)
   height: 100%
+  -webkit-text-size-adjust: 100%
 
-body 
+body
+  margin: 0
   min-height: 100vh
   scroll-behavior: smooth
   text-rendering: optimizeSpeed
-  line-height: 1.5
+  line-height: var(--main-line-height)
 
 *,
 *::before,
-*::after  
+*::after
   box-sizing: border-box
 
 ul[class],
-ol[class] 
+ol[class]
   list-style: none
   padding: 0
 
@@ -40,22 +40,22 @@ dl,
 dd
   margin: 0
 
-a:not([class]) 
+a:not([class])
   text-decoration-skip-ink: auto
 
-img 
+img
   max-width: 100%
   display: block
 
 input,
 button,
 textarea,
-select 
+select
   font: inherit
 
-/* Удаляем все анимации и переходы для людей, которые предпочитай их не использовать */
-@media (prefers-reduced-motion: reduce) 
-  * 
+/* Remove all animations and transitions for people who would rather not use them */
+@media (prefers-reduced-motion: reduce)
+  *
     animation-duration: 0.01ms !important
     animation-iteration-count: 1 !important
     transition-duration: 0.01ms !important
@@ -67,25 +67,19 @@ iframe,
 img,
 svg,
 video,
-textarea 
+textarea
   vertical-align: middle
 
-textarea 
+textarea
   resize: none
 
-section 
+section
   position: relative
 
 input,
 select,
-button 
+button
   outline: none
-
-.wrapper 
-  +wrapper()
-
-.content 
-  flex: 1 0 auto
 
 //Модули
 @import 'modules/modules'

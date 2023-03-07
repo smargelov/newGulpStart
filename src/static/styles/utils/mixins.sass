@@ -1,10 +1,38 @@
-= sizebox($a,$b: $a) 
+=sizebox($a,$b: $a)
   width: $a
   height: $b
 
-// @mixin placeholder {
-//   ::-webkit-input-placeholder {@content}
-//   :-moz-placeholder           {@content}
-//   ::-moz-placeholder          {@content}
-//   :-ms-input-placeholder      {@content}
-// }
+=font-face($family, $path, $weight: normal, $style: normal)
+  @font-face
+    font-family: $family
+    src: local('#{$path}'), url('#{$path}.woff2') format('woff2'), url('#{$path}.woff') format('woff'), url('#{$path}.ttf') format('truetype')
+    font-weight: $weight
+    font-style: $style
+
+
+=baseTransition($param: all, $duration: .3)
+  transition: $param #{$duration}s ease-in-out
+
+=placeholder
+  &::-webkit-input-placeholder
+    @content
+
+  &:-moz-placeholder
+    /* Firefox 18-
+    @content
+
+  &::-moz-placeholder
+    /* Firefox 19+
+    @content
+
+  &:-ms-input-placeholder
+    @content
+
+=visuallyHidden
+  appearance: none
+  position: absolute
+  width: 1px
+  height: 1px
+  clip: rect(0 0 0 0)
+  overflow: hidden
+  margin-left: -1px

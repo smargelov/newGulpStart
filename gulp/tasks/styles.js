@@ -30,6 +30,7 @@ module.exports = function () {
             }))
             .pipe(mmq())
             .pipe(csscomb())
+            .pipe(rename('styles.min.css'))
             .pipe($.gulp.dest(stylesPATH.output))
     });
     $.gulp.task('styles:build-min', () => {
