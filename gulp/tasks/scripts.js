@@ -63,7 +63,7 @@ module.exports = function () {
                 sourcemap: false
             }
         })
-            .pipe(source('main.js'))
+            .pipe(source('main.min.js'))
             .pipe(buffer())
             .pipe(uglify())
             .pipe($.gulp.dest(scriptsPATH.output))

@@ -45,7 +45,7 @@ $.gulp.task('build', $.gulp.series(
 $.gulp.task('build-min', $.gulp.series(
     'clean',
     $.gulp.parallel(
-        'pug',
+        'pug:min',
         'fonts',
         'inc',
         'styles:build-min',

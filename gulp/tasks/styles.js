@@ -18,7 +18,7 @@ module.exports = function () {
             .pipe(sourcemaps.init())
             .pipe(sass())
             .pipe(sourcemaps.write())
-            .pipe(rename('styles.min.css'))
+            .pipe(rename('styles.css'))
             .pipe($.gulp.dest(stylesPATH.output))
             .on('end', $.browserSync.reload);
     });
@@ -30,7 +30,7 @@ module.exports = function () {
             }))
             .pipe(mmq())
             .pipe(csscomb())
-            .pipe(rename('styles.min.css'))
+            .pipe(rename('styles.css'))
             .pipe($.gulp.dest(stylesPATH.output))
     });
     $.gulp.task('styles:build-min', () => {
