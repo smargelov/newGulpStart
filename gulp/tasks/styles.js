@@ -1,5 +1,5 @@
 const plumber = require('gulp-plumber'),
-    sass = require('gulp-sass'),
+    sass = require('gulp-sass')(require('sass')),
     autoprefixer = require('gulp-autoprefixer'),
     csso = require('gulp-csso'),
     csscomb = require('gulp-csscomb'),
@@ -7,7 +7,7 @@ const plumber = require('gulp-plumber'),
     rename = require('gulp-rename'),
     mmq = require('gulp-merge-media-queries'),
     stylesPATH = {
-        "input": "./dev/static/styles/",
+        "input": "./src/static/styles/",
         "output": "./build/css/"
     };
 
@@ -17,9 +17,6 @@ module.exports = function () {
             .pipe(plumber())
             .pipe(sourcemaps.init())
             .pipe(sass())
-            .pipe(autoprefixer({
-                overrideBrowserslist: ['last 3 versions']
-            }))
             .pipe(sourcemaps.write())
             .pipe(rename('styles.min.css'))
             .pipe($.gulp.dest(stylesPATH.output))
@@ -31,7 +28,6 @@ module.exports = function () {
             .pipe(autoprefixer({
                 overrideBrowserslist: ['last 3 versions']
             }))
-            .pipe(autoprefixer())
             .pipe(mmq())
             .pipe(csscomb())
             .pipe($.gulp.dest(stylesPATH.output))
@@ -39,7 +35,9 @@ module.exports = function () {
     $.gulp.task('styles:build-min', () => {
         return $.gulp.src(stylesPATH.input + 'styles.sass')
             .pipe(sass())
-            .pipe(autoprefixer())
+            .pipe(autoprefixer({
+                overrideBrowserslist: ['last 3 versions']
+            }))
             .pipe(mmq())
             .pipe(csscomb())
             .pipe(csso())

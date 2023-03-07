@@ -1,54 +1,71 @@
 const uglify = require('gulp-uglify'),
+    source = require('vinyl-source-stream'),
+    buffer = require('vinyl-buffer'),
+    rollup = require('@rollup/stream'),
+
+    babel = require('@rollup/plugin-babel'),
+    commonjs = require('@rollup/plugin-commonjs'),
+    nodeResolve = require('@rollup/plugin-node-resolve'),
     concat = require('gulp-concat'),
     scriptsPATH = {
-        "input": "./dev/static/js/",
-        "output": "./build/js/"
-    },
-    babel = require('gulp-babel');
+        'input': './src/static/js/',
+        'output': './build/js/'
+    }
+
+let cache
 
 module.exports = function () {
-    $.gulp.task('libsJS:dev', () => {
-        return $.gulp.src(['node_modules/svg4everybody/dist/svg4everybody.min.js'])
-            .pipe(concat('libs.min.js'))
-            .pipe($.gulp.dest(scriptsPATH.output));
-    });
-
-    $.gulp.task('libsJS:build', () => {
-        return $.gulp.src(['node_modules/svg4everybody/dist/svg4everybody.min.js'])
-            .pipe(concat('libs.min.js'))
-            .pipe(uglify())
-            .pipe($.gulp.dest(scriptsPATH.output));
-    });
-
     $.gulp.task('js:dev', () => {
-        return $.gulp.src([scriptsPATH.input + '*.js',
-                '!' + scriptsPATH.input + 'libs.min.js'
-            ])
-            .pipe(babel({
+        return rollup({
+            input: scriptsPATH.input + 'main.js',
+            plugins: [babel({
                 presets: ['@babel/env']
-            }))
+            }), commonjs(), nodeResolve()],
+            cache: cache,
+            output: {
+                format: 'iife',
+                sourcemap: true
+            }
+        })
+            .on('bundle', function (bundle) {
+                cache = bundle
+            })
+            .pipe(source('main.js'))
+            .pipe(buffer())
             .pipe($.gulp.dest(scriptsPATH.output))
-            .pipe($.browserSync.reload({
-                stream: true
-            }));
-    });
+            .pipe($.browserSync.reload({stream: true}))
+    })
 
     $.gulp.task('js:build', () => {
-        return $.gulp.src([scriptsPATH.input + '*.js',
-                '!' + scriptsPATH.input + 'libs.min.js'
-            ])
-            .pipe(babel({
+        return rollup({
+            input: scriptsPATH.input + 'main.js',
+            plugins: [babel({
                 presets: ['@babel/env']
-            }))
+            }), commonjs(), nodeResolve()],
+            output: {
+                format: 'iife',
+                sourcemap: false
+            }
+        })
+            .pipe(source('main.js'))
+            .pipe(buffer())
             .pipe($.gulp.dest(scriptsPATH.output))
-    });
+    })
 
     $.gulp.task('js:build-min', () => {
-        return $.gulp.src([scriptsPATH.input + '*.js',
-                '!' + scriptsPATH.input + 'libs.min.js'
-            ])
-            .pipe(concat('main.min.js'))
+        return rollup({
+            input: scriptsPATH.input + 'main.js',
+            plugins: [babel({
+                presets: ['@babel/env']
+            }), commonjs(), nodeResolve()],
+            output: {
+                format: 'iife',
+                sourcemap: false
+            }
+        })
+            .pipe(source('main.js'))
+            .pipe(buffer())
             .pipe(uglify())
             .pipe($.gulp.dest(scriptsPATH.output))
-    });
-};
+    })
+}
